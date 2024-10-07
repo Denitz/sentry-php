@@ -10,6 +10,7 @@ use Sentry\Options;
 use Sentry\Serializer\EnvelopItems\CheckInItem;
 use Sentry\Serializer\EnvelopItems\EventItem;
 use Sentry\Serializer\EnvelopItems\LogsItem;
+use Sentry\Serializer\EnvelopItems\ProfileChunkItem;
 use Sentry\Serializer\EnvelopItems\ProfileItem;
 use Sentry\Serializer\EnvelopItems\TransactionItem;
 use Sentry\Tracing\DynamicSamplingContext;
@@ -73,6 +74,9 @@ final class PayloadSerializer implements PayloadSerializerInterface
             case EventType::logs():
                 $items[] = LogsItem::toEnvelopeItem($event);
                 break;
+            case EventType::profileChunk():
+                    $items = ProfileChunkItem::toEnvelopeItem($event);
+                    break;
         }
 
         return \sprintf("%s\n%s", JSON::encode($envelopeHeader), implode("\n", array_filter($items)));
