@@ -396,6 +396,15 @@ class Hub implements HubInterface
         }
     }
 
+    public function getProfilerId()
+    {
+        if ($this->profiler !== null) {
+            return $this->profiler->getProfilerId();
+        }
+
+        return null;
+    }
+
     /**
      * Gets the scope bound to the top of the stack.
      */
